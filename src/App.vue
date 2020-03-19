@@ -1,25 +1,39 @@
 <template>
   <div id="app">
     <action-sheet></action-sheet>
+<!--      一上来显示的这里是哪里?-->
     <transition :name="routerViewAnimation">
+<!--        blurBgShow默认为false,当打开音乐详情会为true 隐藏-->
       <router-view v-show="!blurBgShow"></router-view>
     </transition>
 
     <search v-show="!blurBgShow" @searchshow="rankshow=false" @searchhide="rankshow=true"></search>
     <div class="content-warper" v-show="rankshow&&!blurBgShow">
+<!--        https://github.com/surmon-china/vue-awesome-swiper
+            vue中使用swiper-->
+<!--        options:配置swiper的属性-->
       <swiper :options="swiperOption" class="swiper-box">
+<!--          这是两个切换的item-->
         <swiper-slide class="swiper-item">
           <rank></rank>
         </swiper-slide>
         <swiper-slide class="swiper-item">
           <recommand></recommand>
         </swiper-slide>
-
+<!--这里放了两个按钮
+pagination:分页导航,默认小圆点-->
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div>
-
+<!--      Vue 提供了 transition 的封装组件，在下列情形中
+    条件渲染 (使用 v-if)
+    条件展示 (使用 v-show)
+    动态组件
+    组件根节点
+，可以给任何元素和组件添加进入/离开过渡
+过渡后会更改routerViewAnimation,而这个是顶部transition的类名-->
     <transition name="play-slide" @after-enter="showBlurBg" @before-leave="hideBlurBg" @after-leave="routerViewAnimation='page-slide'">
+<!--        歌曲详情页,点击底部播放会触发-->
       <play v-show="playPageShow"></play>
     </transition>
     <transition name="play-slide">
@@ -29,10 +43,13 @@
     <transition name="bar-slide">
       <div id="play-bar" v-show="!playPageShow">
         <!-- <audio id="music" :src="dataUrl" @timeupdate="updateTime" @ended="playContinue" autoplay></audio> -->
+<!--          点击查看歌曲
+打开上面的play-slide,触发钩子after-enter:showBlurBg-->
         <div class="play-bar-image-container" @touchstart="showPlayPage" @click="showPlayPage">
           <img class="play-bar-image" v-lazy="coverImgUrl">
         </div>
         <p class="play-bar-text" @touchstart="showPlayPage" @click="showPlayPage">{{song.name}}</p>
+<!--          点击暂停或播放音乐-->
         <img class="play-bar-button" :src="playing?iconPause:iconPlay" @touchend="tapButton" @click="tapButton">
       </div>
     </transition>
@@ -66,23 +83,31 @@ export default {
     swiperSlide
   },
   methods: {
+      // 播放按钮
     tapButton(event) {
+        debugger;
       event.preventDefault();
       this.playing ? this.pause() : this.play();
     },
+      // 当前播放音乐的封面
     showPlayPage(event) {
-      event.preventDefault();
+        debugger;
+        event.preventDefault();
       this.playPageShow = true;
     },
     hidePlayPage(event) {
-      event.preventDefault();
+        debugger;
+        event.preventDefault();
       this.playPageShow = false;
     },
     showBlurBg() {
+        debugger;
+        // name - string，用于自动生成 CSS 过渡类名。例如：name: 'fade' 将自动拓展为.fade-enter，.fade-enter-active等
       this.routerViewAnimation = "fade";
       this.blurBgShow = true;
     },
     hideBlurBg() {
+        debugger;
       this.blurBgShow = false;
     },
     ...mapMutations(["play", "pause", "playContinue"])
@@ -99,6 +124,7 @@ export default {
         pagination: ".swiper-pagination",
         paginationClickable: true,
         paginationBulletRender(swiper, index, className) {
+            // 返回两个按钮标签
           return `<span class="${className} swiper-pagination-bullet-custom">${TAB_NAME[
             index
           ]}</span>`;

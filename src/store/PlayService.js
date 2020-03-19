@@ -19,7 +19,7 @@ player.on("ended", function () {
 });
 export default {
   state: {
-    playing: false,
+    playing: false,// 初始化默认配置  播放 false
     currentTime: 0,
     duration: 0,
     playMode: def.SEQUENTIAL,

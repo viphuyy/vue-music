@@ -1,6 +1,9 @@
+<!--打开的播放音乐节目-->
 <template>
   <div id="play" class="music-play-page">
     <div class="music-album">
+<!--        隐藏音乐详情按钮
+会触发首页钩子:before-leave-->
       <div class="play-page-hide-btn"
            @touchend.prevent.stop="hidePlayPage"
            @click="hidePlayPage">
