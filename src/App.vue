@@ -32,6 +32,7 @@ pagination:分页导航,默认小圆点-->
     组件根节点
 ，可以给任何元素和组件添加进入/离开过渡
 过渡后会更改routerViewAnimation,而这个是顶部transition的类名-->
+<!--      transition的name属性是用来替换v-enter的v的,替换后匹配为play-slide-enter的css类名-->
     <transition name="play-slide" @after-enter="showBlurBg" @before-leave="hideBlurBg" @after-leave="routerViewAnimation='page-slide'">
 <!--        歌曲详情页,点击底部播放会触发-->
       <play v-show="playPageShow"></play>
@@ -219,11 +220,13 @@ body {
 }
 
 .page-slide-enter-active {
-  transition: all 0.3s ease;
+  /*transition: all 0.3s ease;*/
+  transition: all 1s cubic-bezier(1 ,0 ,0.75 ,1);
 }
 
 .page-slide-leave-active {
-  transition: all 0.3s ease-out;
+  /*transition: all 0.3s ease-out;*/
+  transition: all 1s cubic-bezier(1 ,0 ,0.75 ,1);
 }
 
 .page-slide-enter,
@@ -232,11 +235,13 @@ body {
 }
 
 .fade-enter-active {
-  transition: all 0.3s ease;
+  /*transition: all 0.3s ease;*/
+  transition: all 1s cubic-bezier(1 ,0 ,0.75 ,1);
 }
 
 .fade-leave-active {
-  transition: all 0.3s ease-out;
+  /*transition: all 0.3s ease-out;*/
+  transition: all 1s cubic-bezier(1 ,0 ,0.75 ,1);
 }
 
 .fade-enter,
@@ -245,11 +250,13 @@ body {
 }
 
 .play-slide-enter-active {
-  transition: all 0.3s ease;
+  /*transition: all 0.3s ease;*/
+  transition: all 1s cubic-bezier(1 ,0 ,0.75 ,1);
 }
 
 .play-slide-leave-active {
-  transition: all 0.3s ease-out;
+  /*transition: all 0.3s ease-out;*/
+  transition: all 1s cubic-bezier(1 ,0 ,0.75 ,1);
 }
 
 .play-slide-enter,
@@ -258,11 +265,13 @@ body {
 }
 
 .bar-slide-enter-active {
-  transition: all 0.3s ease;
+  /*transition: all 0.3s ease;*/
+  transition: all 1s cubic-bezier(1 ,0 ,0.75 ,1);
 }
 
 .bar-slide-leave-active {
-  transition: all 0.3s ease-out;
+  /*transition: all 0.3s ease-out;*/
+  transition: all 1s cubic-bezier(1 ,0 ,0.75 ,1);
 }
 
 .bar-slide-enter,
